@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bill-Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stechuhr">
+    <meta name="author" content="Yulia">
+    
+    <!-- Scripts -->
+    <script data-main="js/main" src="js/libs/require.js"></script>
+
+    <!-- Styles -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      .table {
+        text-align: left;
+        width: 50%;
+        margin-top: 30px;
+        margin-left: 20px;
+      }
+      .form-group {
+        text-align: right;
+      }
+      .navbar-header {
+        width: 100%;
+      }
+      #search,#new {
+        text-align: left;
+        margin-left: 15px;
+      }
+      #login-button {
+        margin-top: 10px;
+        margin-right: 4px;
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div>
+      </br>
+      <div class="navbar-header">
+        <form class="navbar-form navbar-right" role="login">
+          <div class="form-group">
+            <span class="glyphicon glyphicon-user"></span>
+            <input type="text" class="form-control" placeholder="Ihr Name">
+            <br />
+            <span class="glyphicon glyphicon-asterisk"></span>
+            <input type="text" class="form-control" placeholder="Ihr Password">
+            <br />
+            <button type="submit" class="btn btn-info" id="login-button">Log in</button>
+          </div>
+        </form>
+      </div>
+      <form class="navbar-form navbar-left" id="search">
+        <input type="text" class="form-control" placeholder="Nach Kunde suchen...">
+        <button type="submit" class="btn btn-info" id="search-button"><span class="glyphicon glyphicon-search"></span></button>
+        <br />
+        <small><i>Sie können nach einem Kunden nach Namen oder ID suchen.(?)</i></small>
+      </form>
+      <form class="navbar-form navbar-left" id="new">
+        <form>
+          <input type="text" class="form-control" data-bind="value: client_name" placeholder="Kundenname">
+          <button data-bind="click: addClient" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Neuen Kunden anlegen</button>
+        </form>
+      </form>
+      <br />
+      <div class="table">
+        <table class="table table-hover table-striped span3">
+        <thead>
+          <tr>
+            <th>Options</th>
+            <th>Name</th>
+            <th>ID</th>
+          </tr>
+        </thead>
+          <tbody data-bind="foreach: clients">
+            <tr>
+              <td><button data-bind="click: $root.removeClient" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i>
+                  </button><button class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></button></td>
+              <td data-bind="text: name"></td>
+              <td data-bind="text: id"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>

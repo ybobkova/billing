@@ -1,9 +1,0 @@
-bookkeeper
-my-bills
-clieman (clients manager)
-billman (bill manager)
-bill-helper
-cost-manager
-bill-manager
-budget-manager
-budget-keeper

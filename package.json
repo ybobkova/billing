@@ -1,0 +1,26 @@
+{
+  "name": "clieman",
+  "version": "0.0.0",
+  "description": "Clients manager",
+  "main": "bill-project.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ybobkova/billing.git"
+  },
+  "keywords": [
+    "cms",
+    "bill"
+  ],
+  "author": "Yulia Bobkova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ybobkova/billing/issues"
+  },
+  "homepage": "https://github.com/ybobkova/billing",
+  "devDependencies": {
+    "zombie": "~2.0.0"
+  }
+}

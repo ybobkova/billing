@@ -1,0 +1,78 @@
+ <head>
+    <meta charset="utf-8">
+    <title>Clients</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yulia">
+    
+    <!-- Scripts -->
+    <script data-main="Resources/assets/js/main" src="Resources/assets/js/libs/require.js"></script>
+    <script type="text/javascript">
+      require(['client']);
+    </script>
+
+    <!-- Styles -->
+    <link href="Resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Resources/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 30px;
+      }
+      h1 {
+        text-align: center;
+      }
+      table > tbody > tr > td {
+        cursor: pointer;
+      }
+      #new {
+        text-align: left;
+        margin-left: 15px;
+        position: absolute;
+      }
+      #search {
+        text-align: left;
+        margin-left: 15px;
+        margin-top: 45px;
+        position: absolute;
+      }
+      .table {
+        text-align: left;
+        margin-top: 70px;
+        margin-left: 20px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Kunden verwalten</h1>
+      <form class="navbar-form navbar-left" id="new">
+          <input type="text" class="form-control" data-bind="value: client_name" placeholder="Kundenname">
+          <button data-bind="click: addClient" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Neuen Kunden anlegen</button>
+      </form>
+      <form class="navbar-form navbar-left" id="search">
+        <input type="text" class="form-control" placeholder="Nach Kunde suchen..."> <!-- Filter the table -->
+        <button type="submit" class="btn btn-info" id="search-button"><span class="glyphicon glyphicon-search"></span></button>
+        <br />
+        <small><i>Sie können nach einem Kunden nach Namen oder ID suchen.(?)</i></small>
+      </form>
+      <div class="table">
+        <table class="table table-hover table-striped span3">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th></th>
+          </tr>
+        </thead>
+          <tbody data-bind="foreach: clients">
+            <tr class='clickableRow' href='./projects.html'>
+              <td data-bind="text: name"></td>
+              <td data-bind="text: id"></td>
+              <td><button data-bind="click: $root.removeClient" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>

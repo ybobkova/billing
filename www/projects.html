@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name of client: Projekte</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yulia Bobkova">
+    
+    <!-- Scripts -->
+    <script data-main="Resources/assets/js/main" src="Resources/assets/js/libs/require.js"></script>
+    <script type="text/javascript">
+      require(['project']);
+    </script>
+
+    <!-- Styles -->
+    <link href="Resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Resources/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 30px;
+      }
+      h1, h4 {
+        text-align: center;
+      }
+      table > tbody > tr > td {
+        cursor: pointer;
+      }
+      #new {
+        margin-top:30px;
+        text-align: center;
+        position: absolute;
+      }
+      .table {
+        margin-top: 70px;
+        position: absolute;
+      }
+      table > thead > tr > th {
+        text-align: center;
+      }
+      table > tbody > tr > th {
+        text-align: center;
+      }
+      .modal-backdrop {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Name des Kunden: Projekte</h1>
+      <div class="navbar-form navbar-left span2 offset2" id="new">
+        <button data-toggle="modal" data-target="#new_modal" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Neues Projekt anlegen</button>
+      </div>
+      <div class="table">
+        <table class="table table-hover table-striped span8 offset2">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Kontakt</th>
+            <th>Termin</th>
+            <th>E-mail</th>
+            <th></th>
+          </tr>
+        </thead>
+          <tbody data-bind="foreach: projects">
+            <tr>
+              <td>
+                <div class="trash_button">
+                  <button data-bind="click: $root.removeProject" class="btn btn-default">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                  <button  data-bind="click: $root.copyValues" data-toggle="modal" data-target="#old_modal" class="btn btn-default">
+                    <i class="glyphicon glyphicon-cog"></i>
+                  </button>
+                </div>
+              </td>
+              <td data-bind="text: name"></td>
+              <td data-bind="text: contact_person"></td>
+              <td data-bind="text: date"></td>
+              <td data-bind="text: email"></td>
+              <td>
+                <button data-toggle="modal" data-target="#offer_modal" class="btn btn-success">Angebot erstellen</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal for new project-->
+
+      <div class="modal fade" id="new_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-bind:"click:nullValues" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Neues Projekt anlegen</h4>
+            </div>
+            <form role="form" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:45px">
+              <fieldset>
+                <div class="form-group">
+                  <input data-bind="value:project_name" type="name" name="name" id="name" class="form-control input-lg" placeholder="Name vom Projekt">
+                </div>
+                <div class="form-group">
+                  <input data-bind="value:contact_person" type="contact" name="contact" id="contact" class="form-control input-lg" placeholder="Kontaktperson">
+                </div>
+                <div class="form-group">
+                  <input data-bind="value:date" type="date" name="date" id="date" class="form-control input-lg" placeholder="Termin">
+                </div>
+                <div class="form-group">
+                  <input data-bind="value:email" type="email" name="email" id="email" class="form-control input-lg" placeholder="E-Mail">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-bind="click:addProject" data-dismiss="modal" class="btn btn-primary">Erstellen</button>
+                </div>
+              </fieldset>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <!-- Modal for old project-->
+
+      <div class="modal fade" id="old_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-bind:"click:nullValues" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Projekt bearbeiten</h4>
+            </div>
+            <form role="form" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:45px">
+              <fieldset>
+                <div class="form-group">
+                  <input data-bind="value:project_name" type="name" name="name" id="name" class="form-control input-lg" placeholder="Name vom Projekt">
+                </div>
+                <div class="form-group">
+                  <input data-bind="value:contact_person" type="contact" name="contact" id="contact" class="form-control input-lg" placeholder="Kontaktperson">
+                </div>
+                <div class="form-group">
+                  <input data-bind="value:date" type="date" name="date" id="date" class="form-control input-lg" placeholder="Termin">
+                </div>
+                <div class="form-group">
+                  <input data-bind="value:email" type="email" name="email" id="email" class="form-control input-lg" placeholder="E-Mail">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-bind="click:changeProject" data-dismiss="modal" class="btn btn-primary">Speichern</button>
+                </div>
+              </fieldset>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <!-- Modal for new offer -->
+
+      <div class="modal fade" id="offer_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-bind:"click: nullValues" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Neues Angebot erstellen</h4>
+            </div>
+            <form role="form" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:45px">
+              <fieldset>
+                <label class="control-label">Empfänger</label>
+                <div class="form-group">
+                  <input type="name" name="name" id="name" class="form-control input-lg" placeholder="Firmenname">
+                </div>
+                <div class="form-group">
+                  <input type="contact" name="contact" id="contact" class="form-control input-lg" placeholder="Kontaktperson">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="post_index" id="post_index" class="form-control input-lg" placeholder="Postindex">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="street" id="street" class="form-control input-lg" placeholder="Straße">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="house" id="house" class="form-control input-lg" placeholder="Hausnummer">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="place" id="place" class="form-control input-lg" placeholder="Ort">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" id="email" class="form-control input-lg" placeholder="E-Mail">
+                </div>
+                <div class="form-group">
+                  <input type="date" name="today_date" id="today_date" class="form-control input-lg" placeholder="Aktuelles Datum">
+                </div>
+                <div class="form-group">
+                  <input type="date" name="until_date" id="until_date" class="form-control input-lg" placeholder="Gültig bis">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-primary">Erstellen</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-primary">Absenden</button>
+                </div>
+              </fieldset>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div> <!-- /container -->
+  </body>
+</html>

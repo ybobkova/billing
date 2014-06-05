@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yulia Bobkova">
     
+    
     <!-- Scripts -->
-    <script data-main="Resources/assets/js/main" src="Resources/assets/js/libs/require.js"></script>
+    <script src="/assets/js/load-require.js"></script>
     <script type="text/javascript">
-      require(['login']);
+      require(['common'], function() {
+        require(['login']);
+      });
     </script>
 
     <!-- Styles -->
-    <link href="Resources/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Resources/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
     <style>
       h1, h5 {
         text-align: center;
@@ -52,12 +55,9 @@
           <a href="" class="btn btn-link pull-right">Passwort vergessen?</a>
         </span>
         <hr class="colorgraph">
-        <div class="btn-group btn-group-justified col-xs-6 col-sm-6 col-md-6">
+        <div class="btn-group btn-group-justified col-xs-4 col-sm-4 col-md-4">
           <div class="btn-group">
             <button type="submit" class="btn btn-lg btn-success">Sign in</button>
-          </div>
-          <div class="btn-group">
-            <a href="./register.html" class="btn btn-lg btn-primary">Registrieren</a>
           </div>
         </div>
       </fieldset>

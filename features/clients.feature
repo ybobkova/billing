@@ -1,8 +1,8 @@
 Feature: Customers
 
   Background:
-    The user is logged in as administrator or as user
-    The user is at the page clients.html
+    Given the user is logged in as administrator or as user
+    And the user is at the page "clients"
 
   Scenario: Create new customer
     Given there is no customer with name "Client"

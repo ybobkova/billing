@@ -1,0 +1,14 @@
+/* globals __dirname */
+module.exports = function() {
+  var cucumberStep = this;
+  var cukedZombie = require('cuked-zombie');
+  var chai = require('chai');
+
+  var infected = cukedZombie.infect(cucumberStep, {
+    world: require('../world-config'),
+    steps: {
+      arguments: [chai.expect],
+      dir: __dirname
+    }
+  });
+};

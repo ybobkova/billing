@@ -2,13 +2,26 @@ module.exports = function (grunt) {
   'use strict';
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  grunt.loadNpmTasks('cuked-zombie');
   
   grunt.initConfig({
-    cucumberjs: {
-      src: 'www/tests/features',
-      options: {
-        steps: 'www/tests/features/step_definitions',
-        format: 'pretty'
+     cucumberjs: {
+      // config for all features when called with: `grunt cucumber`
+      all: {
+        src: 'features',
+        options: {
+          steps: "tests/js/cucumber/bootstrap.js",
+          format: "pretty"
+        }
+      },
+
+      // config for single features when called with `grunt --filter some-feature`
+      features: {
+        src: 'features',
+        options: {
+          steps: "tests/js/cucumber/bootstrap.js",
+          format: "pretty"
+        }
       }
     },
 
@@ -26,6 +39,11 @@ module.exports = function (grunt) {
       "css": {
         files: [
           {expand: true, cwd: "Resources/assets/css", src: ['**/*'], dest: 'www/assets/css'}
+        ]
+      },
+      "img": {
+        files: [
+          {expand: true, cwd: "Resources/assets/img", src: ['**/*'], dest: 'www/assets/img'}
         ]
       },
     },
@@ -52,6 +70,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build-dev', ['copy:config-dev', 'copy:css', 'uglify:requirejswithconfig']);
-  grunt.registerTask('build', ['copy:config', 'copy:css', 'uglify:requirejswithconfig']);
+  grunt.registerTask('build-dev', ['copy:config-dev', 'copy:css', 'copy:img', 'uglify:requirejswithconfig']);
+  grunt.registerTask('build', ['copy:config', 'copy:css', 'copy:img', 'uglify:requirejswithconfig']);
 };

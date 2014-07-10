@@ -3,3 +3,5 @@
 /vendor/
 /www/assets
 /deploy-info.json
+/files/cache
+/files/logs

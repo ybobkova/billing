@@ -1,7 +1,7 @@
 module.exports = {
   cli: undefined,// path to your symfony command line interface,
   domain: "clieman",
-  debug: true
+  debug: false
   /*
   cookies: [{
     name: 'staging_access',

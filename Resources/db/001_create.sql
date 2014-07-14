@@ -1,0 +1,5 @@
+CREATE USER 'clieman'@'localhost' IDENTIFIED BY 'vitgX45v0Fdp2X';
+GRANT USAGE ON *.* TO 'clieman'@'localhost' IDENTIFIED BY 'vitgX45v0Fdp2X' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+CREATE DATABASE IF NOT EXISTS `clieman`;
+GRANT ALL PRIVILEGES ON `clieman`.* TO 'clieman'@'localhost';
+GRANT ALL PRIVILEGES ON `clieman\_%`.* TO 'clieman'@'localhost';

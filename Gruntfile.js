@@ -5,7 +5,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('cuked-zombie');
   
   grunt.initConfig({
-     cucumberjs: {
+    cucumberjs: {
       // config for all features when called with: `grunt cucumber`
       all: {
         src: 'features',
@@ -46,6 +46,41 @@ module.exports = function (grunt) {
           {expand: true, cwd: "Resources/assets/img", src: ['**/*'], dest: 'www/assets/img'}
         ]
       },
+      "fonts": {
+        files: [
+          {expand: true, cwd: "Resources/assets/fonts", src: ['**/*'], dest: 'www/assets/fonts'}
+        ]
+      },
+    },
+
+    hogan: {
+      build: {
+        options: {
+          binderName : "amd",
+          templates : "Resources/tpl/**/*.mustache",
+          output : "www/assets/js/templates-compiled.js",
+          nameFunc: function(fileName) {
+            var nodepath = require( "path" );
+            fileName = nodepath.normalize(fileName);
+
+            var pathParts = fileName.split(nodepath.sep).slice(['Resources', 'tpl'].length, -1);
+            var namespace = pathParts.length > 0 ? pathParts.join('/')+'/' : '';
+            var templateName = namespace+nodepath.basename(fileName, nodepath.extname(fileName));
+
+            return templateName;
+          }
+        }
+      }
+    },
+
+    sweepout: {
+      packages: {
+        options: {
+          dir: "src/js/lib",
+          configFile: "src/js/config-shimney.js",
+          baseUrl: "lib/"
+        }
+      }
     },
 
     uglify: {
@@ -70,6 +105,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build-dev', ['copy:config-dev', 'copy:css', 'copy:img', 'uglify:requirejswithconfig']);
-  grunt.registerTask('build', ['copy:config', 'copy:css', 'copy:img', 'uglify:requirejswithconfig']);
+  grunt.registerTask('build-dev', ['hogan', 'sweepout', 'copy:config-dev', 'copy:css', 'copy:img', 'copy:fonts', 'uglify:requirejswithconfig']);
+  grunt.registerTask('build', ['hogan', 'sweepout', 'copy:config', 'copy:css', 'copy:img', 'copy:fonts', 'uglify:requirejswithconfig']);
 };

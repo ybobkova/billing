@@ -1,0 +1,31 @@
+{
+    "name": "webforge/clieman",
+    "license": "closed",
+    "authors": [
+        {
+            "name": "Yulia Bobkova",
+            "email": "y.bobkova@ps-webforge.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "webforge/project-stack": "1.2.*@dev",
+        "nelmio/alice": "1.7.*",
+        "friendsofsymfony/user-bundle": "dev-master#3969d7fe39fd58398bf9a00110ca349c000fa05e",
+        "symfony/dependency-injection": "2.6.*@dev",
+        "symfony/swiftmailer-bundle": "2.3.*@stable"
+    },
+    "require-dev": {
+        "doctrine/data-fixtures": "1.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Clieman": ["src/php/"]
+        }
+    },
+    "extra": {
+      "directory-locations": {
+        "doctrine-entities": "src/php/Clieman/Entities/"
+      }
+    }
+}

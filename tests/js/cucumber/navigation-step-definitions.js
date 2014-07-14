@@ -1,6 +1,7 @@
 module.exports = function(expect) {
 
   this.Given(/^the user is at the page "([^"]*)"$/, function(location, callback) {
+    var world = this;
     var urls = {
       home: '/'
     };
@@ -10,7 +11,7 @@ module.exports = function(expect) {
     var url = urls[location];
 
     this.visitPage(url, function() {
-      console.log(this.browser.html());
+      world.browser.log(this.browser.html());
       callback();
     });
   });

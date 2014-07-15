@@ -1,0 +1,37 @@
+fos_rest:
+    routing_loader:
+        default_format: json
+        include_format: false
+    service:
+      #serializer: projectstack.serializer
+    view:
+        default_engine: mustache
+        serialize_null: true
+        view_response_listener: true
+        formats:
+          xml: false
+          json: true
+        templating_formats: 
+          html: true
+        failed_validation: HTTP_BAD_REQUEST
+
+        #exception_wrapper_handler: SSC\Handler\ExceptionWrapperHandler
+
+    format_listener:
+      rules:
+        # sometimes it got html as application/json header before this-.-
+        - { path: ^/, priorities: [ 'json', 'html' ], fallback_format: 'html', prefer_extension: true }
+
+    serializer:
+        serialize_null: true
+
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json # nicht den form to json decoder nehmen der macht aus NULL => string "" und das verwirrt die symfony form
+
+jms_serializer:
+  visitors:
+    json:
+      options: 128 # pretty print
+
+  #naming_strategy: ssc.serializer_naming_strategy

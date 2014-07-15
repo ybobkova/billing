@@ -1,0 +1,5 @@
+services:
+  controller.main:
+    class:     Clieman\Controllers\MainController
+    calls:
+      - [setContainer, ["@service_container"]]

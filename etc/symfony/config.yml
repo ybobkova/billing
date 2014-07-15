@@ -1,0 +1,13 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: parts/security.yml }
+    - { resource: parts/services.yml }
+    - { resource: "../../vendor/webforge/project-stack/etc/symfony/services.yml" }
+    #- { resource: "D:\www/webforge-project-stack/etc/symfony/services.yml" }
+    - { resource: "parts/framework.yml" }
+    - { resource: "parts/twig.yml" }
+    - { resource: "parts/doctrine.yml" }
+    #- { resource: "parts/fos_rest.yml" }
+    - { resource: "parts/fos_user.yml" }
+    #- { resource: "parts/swiftmailer.yml" }
+    #- { resource: "parts/in_tests.yml" }

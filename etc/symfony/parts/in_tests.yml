@@ -1,0 +1,8 @@
+parameters: 
+  database_name: %webforge.project.lower-name%_tests
+
+framework:
+  session:
+    storage_id: session.storage.mock_file
+  test: ~
+

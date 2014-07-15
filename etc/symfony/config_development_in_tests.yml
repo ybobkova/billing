@@ -1,0 +1,6 @@
+imports:
+    - { resource: config_development.yml }
+
+parameters:
+    database_name: %webforge.project.lower-name%_tests
+

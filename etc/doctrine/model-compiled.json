@@ -1,0 +1,20 @@
+{
+  "namespace":"Clieman\\Entities",
+  "entities":[
+    {
+      "name":"User",
+      "fqn":"Clieman\\Entities\\User",
+      "singular":"user",
+      "plural":"users",
+      "tableName":"users",
+      "extends":"FOS\\UserBundle\\Model\\User",
+      "description":null,
+      "properties":{
+        "id":{
+          "name":"id",
+          "type":"Id"
+        }
+      }
+    }
+  ]
+}

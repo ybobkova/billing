@@ -1,0 +1,15 @@
+parameters:
+    # see resources/db/001_create.sql
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: %webforge.project.lower-name%
+    database_user: %webforge.project.lower-name%
+    database_password: vitgX45v0Fdp2X
+    staging_access_token: tokenU1V2pUK
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: de
+    secret: 22z5yoo2k9kt8dkdk349xlkjsxxf

@@ -1,0 +1,6 @@
+sensio_framework_extra:
+    router:   { annotations: false }
+    request:  { converters: true }
+    view:     { annotations: false } # FOSRestBundle should make this
+    cache:    { annotations: true }
+

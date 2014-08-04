@@ -2,11 +2,9 @@ home:
     path:      /
     defaults:  { _controller: controller.main:homeAction }
 
-clients_page:
-    path:      /clients/{clientId}
+clients:
+    path:      /clients
     defaults:  { _controller: controller.main:clientsAction }
-    requirements: 
-      clientId: \d+
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

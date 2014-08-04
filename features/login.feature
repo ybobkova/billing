@@ -1,25 +1,27 @@
 Feature: Log in
 
   Background:
-    Given there is a user in system with the Nickname "HerrMüller" and Password "secret123"
+    Given the fixture parts:
+    """
+    alice: user.mueller
+    """
     And the user is not logged in
     And the user is at the page "home"
 
   Scenario: Successful log in
-    When the user fills "HerrMüller" in the "email"-field
-    And the user fills "secret123" in the "password"-field
+    When the user fills "herrmueller" in the "_username"-field
+    And the user fills "secret123" in the "_password"-field
     And the user presses the "Sign in"-Button
     Then the user sees the headline "Kunden verwalten"
 
   Scenario: No such Username
-    When the user fills in a wrong username in the "email"-field
-    And the user fills "Password" in the "password"-field
+    When the user fills in a wrong username in the "_username"-field
+    And the user fills "Password" in the "_password"-field
     When the user presses the "Sign in"-Button
-    Then the user must see the label "No such Username"
+    Then the user must see the label "Invalid username or password"
 
-#  Scenario: Wrong Password
-#    Given there is a user in system with the Nickname "User" and Password "Password"
-#    And the user fills "User" in the "email"-field
-#    And the user fills "Passworddd" in the "password"-field
-#    When the user presses the "Sign in"-Button
-#    Then the user must see the label "Wrong Password"
+  Scenario: Wrong Password
+    When the user fills "herrmueller" in the "_username"-field
+    And the user fills "secret12345" in the "_password"-field
+    When the user presses the "Sign in"-Button
+    Then the user must see the label "Invalid username or password"

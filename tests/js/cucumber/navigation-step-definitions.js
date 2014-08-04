@@ -3,7 +3,8 @@ module.exports = function(expect) {
   this.Given(/^the user is at the page "([^"]*)"$/, function(location, callback) {
     var world = this;
     var urls = {
-      home: '/'
+      home: '/',
+      clients: '/clients'
     };
 
     expect(urls).to.have.property(location);
@@ -11,8 +12,9 @@ module.exports = function(expect) {
     var url = urls[location];
 
     this.visitPage(url, function() {
-      world.browser.log(this.browser.html());
-      callback();
+      this.browser.log(this.browser.html());
     });
+
+    callback();
   });
-}
+};

@@ -16,7 +16,8 @@
         "symfony/swiftmailer-bundle": "2.3.*@stable"
     },
     "require-dev": {
-        "doctrine/data-fixtures": "1.0.*@dev"
+        "doctrine/data-fixtures": "1.0.*@dev",
+        "nelmio/alice": "1.7.*@stable"
     },
     "autoload": {
         "psr-0": {
@@ -25,7 +26,8 @@
     },
     "extra": {
       "directory-locations": {
-        "doctrine-entities": "src/php/Clieman/Entities/"
+        "doctrine-entities": "src/php/Clieman/Entities/",
+        "alice-fixtures": "tests/files/fixtures/"
       }
     }
 }

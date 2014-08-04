@@ -1,5 +1,7 @@
 twig:
     auto_reload: true
+    paths:
+        "%kernel.root_dir%/Resources/tpl/Clieman/": clieman_templates
     #form:
     #    resources: 
     #      - ':Form:ssc-customizations.html.twig'

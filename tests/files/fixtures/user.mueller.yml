@@ -1,0 +1,7 @@
+Clieman\Entities\User:
+  herrmueller: 
+    username: herrmueller
+    email: herr.mueller@ps-webforge.net
+    plainPassword: secret123
+    enabled: true
+    roles: ['ROLE_ADMIN']

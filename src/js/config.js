@@ -1,15 +1,22 @@
+/* globals requirejs */
 var require = {
+
   baseUrl: "/root/src/js",
 
-	paths: {
-	  'jquery': "lib/jquery-2.0.2.min",
-	  'bootstrap': "lib/bootstrap.min",
-	  'knockout': "lib/knockout-2.2.1",
-	  'handlebars': "lib/handlebars"
+  // override paths especially for dev, define everything with /root in front to allow the bootstrap.js for mocha to alter it
+  paths: {
+    "bootstrap": "lib/bootstrap.min",
   },
   shim: {
     'bootstrap': {
       deps: ['jquery']
     }
   }
+
+  // do shims and common paths in config_live.js
+
+};
+
+if (typeof(requirejs) === "function") {
+  requirejs.config(require);
 }

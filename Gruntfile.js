@@ -51,6 +51,16 @@ module.exports = function (grunt) {
           {expand: true, cwd: "Resources/assets/fonts", src: ['**/*'], dest: 'www/assets/fonts'}
         ]
       },
+      "jslibs": {
+        files: [
+          {expand: true, cwd: "src/js/lib", src: ['**/*.js'], dest: 'www/assets/js/lib'}
+        ]
+      },
+      "jsmisc": {
+        files: [
+          {expand: true, src: ['etc/doctrine/model-compiled.json'], dest: 'www/assets/js'},
+        ]
+      }
     },
 
     hogan: {
@@ -94,6 +104,21 @@ module.exports = function (grunt) {
       }
     },
 
+    "merge-configs": {
+      dev: {
+        options: {
+          targetFile: 'www/assets/js/config.js',
+
+          configFiles: [
+            'src/js/config-shimney.js',
+            'src/js/config.js'
+          ],
+
+          template: 'src/js/config-template.js'
+        }
+      }
+    },
+
     watch: {
       'css': {
         options: {
@@ -105,6 +130,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build-dev', ['hogan', 'sweepout', 'copy:config-dev', 'copy:css', 'copy:img', 'copy:fonts', 'uglify:requirejswithconfig']);
-  grunt.registerTask('build', ['hogan', 'sweepout', 'copy:config', 'copy:css', 'copy:img', 'copy:fonts', 'uglify:requirejswithconfig']);
+  grunt.registerTask('build-dev', ['hogan', 'sweepout', 'copy:config-dev', 'copy:css', 'copy:img', 'copy:fonts', 'copy:jslibs', 'copy:jsmisc', 'merge-configs:dev', 'uglify:requirejswithconfig']);
+  grunt.registerTask('build', ['hogan', 'sweepout', 'copy:config', 'copy:css', 'copy:img', 'copy:fonts', 'copy:jslibs', 'copy:jsmisc', 'uglify:requirejswithconfig']);
 };

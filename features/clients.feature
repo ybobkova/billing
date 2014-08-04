@@ -1,12 +1,15 @@
-Feature: Customers
+Feature: Clients
 
   Background:
-    Given the user is logged in as administrator or as user
-    And the user is at the page "clients"
+    Given the fixture parts:
+    """
+    alice: user.mueller
+    """
+    Given the user is logged in from the main page
 
   Scenario: Create new customer
-    Given there is no customer with name "Client"
-    And the user fills "Client" in the customer-field
+    Given there is no customer with name "Blue Skyes GmbH"
+    And the user fills "Blue Skyes GmbH" in the customer-field
     When the user presses the "Neuen Kunden anlegen"-Button
     Then the customer must be seen in the customers-table
 

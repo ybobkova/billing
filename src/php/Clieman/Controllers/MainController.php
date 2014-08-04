@@ -9,22 +9,22 @@ use Clieman\Entities\User;
 
 class MainController extends Controller {
 	
-	/*
-	public function createNewUserAction() {
-		$user = new User($email);
+	public function createNewUserAction($nick, $password) {
+		$user = new User($nick, $password);
 
 		$em = $this->get('doctrine.orm.entity_manager');
 		$em->persist($user);
 		$em->flush();
 	}
 	
-	public function findUser() {
+/*	public function findUser() {
 		$em = $this->get('doctrine.orm.entity_manager');
 
 		$pscheit = $em->getRepository('Clieman\Entities\User')->findBy(array('email'=>'p.scheit@ps-webforge.com'));
 	}
-	*/
 
+*/
+	
 	public function homeAction() {
 
 		$content = $this->renderView(
@@ -41,14 +41,10 @@ class MainController extends Controller {
 		return $response;
 	}
 
-	public function clientsAction($clientId) {
-
+	public function clientsAction() {
 		$content = $this->renderView(
 	      ':Clieman:clients.html.mustache',
-           array(
-           	'title' => 'Startseite',
-           	'clientId'=>$clientId
-           )
+           array('clientId'=>'24')
         );
 
 		$response = new Response(

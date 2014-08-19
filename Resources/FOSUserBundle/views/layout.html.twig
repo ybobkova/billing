@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yulia Bobkova">
+    {% block title %}
+    {% endblock title %}
+
+    <!-- Scripts -->
+    <script src="/assets/js/load-require.js"></script>
+    {% block extra_js %} 
+    {% endblock extra_js %}
+
+    <!-- Styles -->
+    <link href="/root/Resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/root/Resources/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    {% block extra_styles %} 
+    {% endblock extra_styles %}
+  </head>
+  <body>
+    <div> 
+      {% block heading %} 
+      {% endblock heading %}
+    </div>
+
+    <!--      
+    <div> 
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+          <a href="{{ path('fos_user_security_logout') }}">
+           {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+          </a>
+      {% else %}
+        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+      {% endif %}
+    </div>
+    -->
+
+    {% for type, messages in app.session.flashbag.all() %}
+      {% for message in messages %}
+        <div class="flash-{{ type }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endfor %}
+
+    <div>
+      {% block fos_user_content %}
+      {% endblock fos_user_content %}
+    </div>
+  </body>
+</html>

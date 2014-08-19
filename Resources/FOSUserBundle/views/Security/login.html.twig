@@ -1,0 +1,64 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block title %}<title> Welcome to Clieman! </title>{% endblock %}
+{% block extra_js %}
+  <script type="text/javascript">
+    require(['common'], function() {
+      require(['login']);
+    });
+  </script>
+{% endblock %}
+
+{% block extra_styles %}
+  <style>
+    h1, h5 {
+      text-align: center;
+    }
+    #not_found_label {
+      margin-top: 115px;
+      color: #FF0000;
+      font-weight: bold;
+      text-align: center;
+   }
+    {% include '@clieman_templates/css/colorgraph.css.mustache' %}
+  </style>
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block heading %}
+  {{ parent() }}
+  <h1>Welcome to Clieman!</h1>
+  <h5><i>Manage your clients and bills with one click!</i></h5>
+{% endblock %}
+
+{% block fos_user_content %}
+
+<form role="form" action="{{ path("fos_user_security_check") }}" method="post" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:45px">
+  <fieldset>
+    <h2>Please Sign In</h2>
+    <input type="hidden" name="_csrf_token" value={{ csrf_token('authenticate') }} />
+    <hr class="colorgraph">
+    <div class="form-group">
+      <input type="text" role="user" name="_username" value="{{ last_username }}" placeholder={{ 'security.login.username'|trans }} class="form-control input-lg" required="required">
+    </div>
+    <div class="form-group">
+      <input type="password" role="password" name="_password" class="form-control input-lg" placeholder={{ 'security.login.password'|trans }} class="form-control input-lg" required="required" >
+    </div>
+    <span class="button-checkbox">
+      <button type="button" class="btn" data-color="info">{{ 'security.login.remember_me'|trans }}</button>
+      <input type="checkbox" name="_remember_me" value="on" class="hidden">
+    </span>
+    <hr class="colorgraph">
+    <div class="btn-group btn-group-justified col-xs-4 col-sm-4 col-md-4">
+      <div class="btn-group">
+        <button type="submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-lg btn-success">Sign in</button>
+      </div>
+    </div>
+    {% if error %}
+      <div id="not_found_label">{{ error|trans }}</div>
+    {% endif %}
+  </fieldset>
+</form>
+
+{% endblock fos_user_content %}
+

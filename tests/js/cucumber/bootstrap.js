@@ -4,10 +4,11 @@ module.exports = function() {
   var cukedZombie = require('cuked-zombie');
   var chai = require('chai');
 
+  var commons = {};
   var infected = cukedZombie.infect(cucumberStep, {
     world: require('../world-config'),
     steps: {
-      arguments: [chai.expect],
+      arguments: [chai.expect, commons],
       dir: __dirname
     }
   });

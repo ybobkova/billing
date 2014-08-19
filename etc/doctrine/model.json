@@ -5,9 +5,16 @@
     {
       "name": "User",
       "extends": "FOS\\UserBundle\\Model\\User",
-    
       "properties": {
         "id": { "type": "DefaultId" }
+      }
+    },
+    {
+      "name": "Client",
+      "properties": {
+        "id": { "type": "DefaultId" },
+        "name": {"type": "String"},
+        "userId": {"type": "Integer"}
       }
     }
   ]

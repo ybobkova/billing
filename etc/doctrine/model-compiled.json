@@ -15,6 +15,29 @@
           "type":"Id"
         }
       }
+    },
+    {
+      "name":"Client",
+      "fqn":"Clieman\\Entities\\Client",
+      "singular":"client",
+      "plural":"clients",
+      "tableName":"clients",
+      "extends":null,
+      "description":null,
+      "properties":{
+        "id":{
+          "name":"id",
+          "type":"Id"
+        },
+        "name":{
+          "name":"name",
+          "type":"String"
+        },
+        "userId":{
+          "name":"userId",
+          "type":"Integer"
+        }
+      }
     }
   ]
 }

@@ -15,8 +15,8 @@ Feature: Log in
     Then the user sees the headline "Kunden verwalten"
 
   Scenario: No such Username
-    When the user fills in a wrong username in the "_username"-field
-    And the user fills "Password" in the "_password"-field
+    When the user fills a wrong value in the "_username"-field
+    And the user fills a wrong value in the "_password"-field
     When the user presses the "Sign in"-Button
     Then the user must see the label "Invalid username or password"
 
@@ -25,3 +25,5 @@ Feature: Log in
     And the user fills "secret12345" in the "_password"-field
     When the user presses the "Sign in"-Button
     Then the user must see the label "Invalid username or password"
+
+  #TODO: Remember me scenario

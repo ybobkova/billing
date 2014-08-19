@@ -4,7 +4,17 @@ home:
 
 clients:
     path:      /clients
-    defaults:  { _controller: controller.main:clientsAction }
+    defaults:  { _controller: controller.clients:indexAction }
+
+add_client:
+    path:      /api/clients
+    defaults:  { _controller: controller.clients:addClientAction }
+    methods:  [POST]
+
+get_clients:
+    path:      /api/clients
+    defaults:  { _controller: controller.clients:getClientsAction }
+    methods:  [GET]
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

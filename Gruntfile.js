@@ -63,6 +63,16 @@ module.exports = function (grunt) {
           {expand: true, src: ['etc/doctrine/model-compiled.json'], dest: 'www/assets/js'},
         ]
       },
+      "jslibs": {
+        files: [
+          {expand: true, cwd: "src/js/lib", src: ['**/*.js'], dest: 'www/assets/js/lib'}
+        ]
+      },
+      "jsmisc": {
+        files: [
+          {expand: true, src: ['etc/doctrine/model-compiled.json'], dest: 'www/assets/js'},
+        ]
+      }
     },
 
     hogan: {

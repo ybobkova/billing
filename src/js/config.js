@@ -6,6 +6,8 @@ var require = {
   // override paths especially for dev, define everything with /root in front to allow the bootstrap.js for mocha to alter it
   paths: {
     "bootstrap": "lib/bootstrap.min",
+    "KnockoutSync": "lib/KnockoutSync",
+    "Amplify": "lib/amplify.core"
   },
   shim: {
     'bootstrap': {

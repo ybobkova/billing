@@ -40,19 +40,4 @@ class MainController extends Controller {
 
 		return $response;
 	}
-
-	public function clientsAction() {
-		$content = $this->renderView(
-	      ':Clieman:clients.html.mustache',
-           array('clientId'=>'24')
-        );
-
-		$response = new Response(
-	    	$content,
-	    	Response::HTTP_OK,
-	    	array('content-type' => 'text/html')
-		);
-
-		return $response;
-	}
 }

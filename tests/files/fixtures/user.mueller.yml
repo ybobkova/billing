@@ -1,0 +1,12 @@
+Clieman\Entities\Client:
+  threeFatties:
+    name: Three Fatties
+    userId: 1
+
+Clieman\Entities\User:
+  herrmueller: 
+    username: herrmueller
+    email: herr.mueller@ps-webforge.net
+    plainPassword: secret123
+    enabled: true
+    roles: ['ROLE_ADMIN']

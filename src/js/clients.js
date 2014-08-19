@@ -1,34 +1,45 @@
-define('client', ['knockout', 'jquery'], function(ko, $) {
+define('clients', ['knockout', 'jquery', 'KnockoutSync/Backend', 'KnockoutSync/EntityModel', 'KnockoutSync/jQueryAjaxDriver', 'knockout-mapping'],
+  function(ko, $, Backend, EntityModel, jQueryAjaxDriver, km) {
 
-  function Client(id, name, index, street, house, place) {
-    var self = this;
-    self.id = ko.observable(id);
-    self.name = ko.observable(name);
-  }
+  var emptyModel = new EntityModel({entities: []});
+  var driver = new jQueryAjaxDriver();
+  var backend = new Backend(driver, emptyModel);
+  var that = this;
 
-  function ClientsViewModel() {
-    var self = this;
-    self.id = 1;
-    self.client_name = ko.observable("");
+  var clientsViewModel = function () {
+    this.client_name = '';
 
-    self.clients = ko.observableArray([
-      new Client(self.id++, "Bazinga"),
-      new Client(self.id++, "Three Fatties")
-    ]);
-
-    self.addClient = function() {
-      if (self.client_name() != "") {
-        self.clients.push(new Client(self.id++, self.client_name()));
-        self.client_name("");
+    var clientsMapping = {
+      'clients': {
+        key: function(data) {
+          return ko.utils.unwrapObservable(data.id);
+        }
       }
-    }
+    };
 
-    self.removeClient = function(client) {
-        self.clients.remove(client);
-    }
-  }
+    km.fromJS({clients:[]}, clientsMapping, this);
+    that.updateModel();
 
-  ko.applyBindings(new ClientsViewModel());
+    this.addClient = function() {
+      console.log(this.client_name);
+      backend.dispatchRequest('POST', 'clients', {name: this.client_name}, [200], function(failure, result) {});
+      that.updateModel();
+      console.log(clientsViewModel);
+    };
+
+    this.removeClient = function() {
+      console.log('remove client');
+    };
+  };
+
+  this.updateModel = function () {
+    backend.dispatchRequest('GET', 'clients', undefined, [200], function(failure, result) {
+      km.fromJS(result, clients);
+    });
+  };
+
+  var clients = new clientsViewModel();
+  ko.applyBindings(clients);
 
   jQuery(document).ready(function($) {
     $(".clickableRow")

@@ -1,18 +1,25 @@
-module.exports = function(expect) {
+module.exports = function(expect, commons) {
 
-  this.Given(/^the user is at the page "([^"]*)"$/, function(location, callback) {
+  commons.goTo = function(location) {
     var world = this;
+
     var urls = {
-      home: '/'
+      home: '/',
+      clients: '/clients',
+      login: '/login'
     };
 
     expect(urls).to.have.property(location);
 
     var url = urls[location];
 
-    this.visitPage(url, function() {
-      world.browser.log(this.browser.html());
-      callback();
+    world.visitPage(url, function() {
+      world.browser.log(world.browser.html());
     });
+  };
+
+  this.Given(/^the user is at the page "([^"]*)"$/, function(location, callback) {
+    commons.goTo.call(this, location);
+    callback();
   });
-}
+};

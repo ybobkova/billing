@@ -3,3 +3,8 @@ services:
     class:     Clieman\Controllers\MainController
     calls:
       - [setContainer, ["@service_container"]]
+
+  controller.clients:
+    class:     Clieman\Controllers\ClientsController
+    calls:
+      - [setContainer, ["@service_container"]]

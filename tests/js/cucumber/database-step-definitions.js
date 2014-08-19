@@ -1,7 +1,7 @@
-var steps = function () {
+var steps = function (expect) {
 
-  this.Given(/^there is a user in system with the Nickname "([^"]*)" and Password "([^"]*)"$/, function(nick, password, callback) {
-    callback();
+  this.Given(/^the fixture parts:$/, function(string, callback) {
+    this.loadFixtureParts(string, callback);
   });
 };
 

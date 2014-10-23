@@ -2,6 +2,7 @@
 
 namespace Clieman\Entities;
 
+use Webforge\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use JMS\Serializer\Annotation AS Serializer;
 
@@ -32,12 +33,14 @@ abstract class CompiledClient {
   protected $name;
   
   /**
-   * userId
-   * @ORM\Column(type="integer")
+   * projects
+   * @ORM\ManyToMany(targetEntity="Clieman\Entities\Project")
+   * @ORM\JoinTable(name="clients2projects", joinColumns={@ORM\JoinColumn(name="clients_id", onDelete="cascade")}, inverseJoinColumns={@ORM\JoinColumn(name="projects_id", onDelete="cascade")})
+   * @Serializer\Type("ArrayCollection")
    * @Serializer\Expose
-   * @Serializer\Type("integer")
+   * @Serializer\Type("ArrayCollection")
    */
-  protected $userId;
+  protected $projects;
   
   /**
    * @param integer $id
@@ -70,21 +73,39 @@ abstract class CompiledClient {
   }
   
   /**
-   * @param integer $userId
+   * @param Doctrine\Common\Collections\Collection<Clieman\Entities\Project> $projects
    */
-  public function setUserId($userId) {
-    $this->userId = $userId;
+  public function setProjects(ArrayCollection $projects) {
+    $this->projects = $projects;
     return $this;
   }
   
   /**
-   * @return integer
+   * @return Doctrine\Common\Collections\Collection<Clieman\Entities\Project>
    */
-  public function getUserId() {
-    return $this->userId;
+  public function getProjects() {
+    return $this->projects;
+  }
+  
+  public function addProject(Project $project) {
+    if (!$this->projects->contains($project)) {
+        $this->projects->add($project);
+    }
+    return $this;
+  }
+  
+  public function removeProject(Project $project) {
+    if ($this->projects->contains($project)) {
+        $this->projects->removeElement($project);
+    }
+    return $this;
+  }
+  
+  public function hasProject(Project $project) {
+    return $this->projects->contains($project);
   }
   
   public function __construct() {
-
+    $this->projects = new ArrayCollection();
   }
 }

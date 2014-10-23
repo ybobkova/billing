@@ -10,11 +10,18 @@
       }
     },
     {
+      "name": "Project",
+      "properties": {
+        "id": { "type": "DefaultId" },
+        "name": {"type": "String"}
+      }
+    },
+    {
       "name": "Client",
       "properties": {
         "id": { "type": "DefaultId" },
         "name": {"type": "String"},
-        "userId": {"type": "Integer"}
+        "projects": {"type": "Collection<Project>"}
       }
     }
   ]

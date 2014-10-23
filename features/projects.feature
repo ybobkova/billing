@@ -1,13 +1,19 @@
 Feature: Projects
 
   Background:
-    The user is logged in as administrator or as user m
-    The user is at the page projects.html
-
+    Given the fixture parts:
+    """
+    alice: user.mueller
+    """
+    Given the user is logged in
+    And the user is at the page "projects" of the client "Three Fatties"
+  
+  @mytag
   Scenario: Create new project modal opens
     When the user presses the button "Neues Projekt anlegen"
     Then the modal with empty form should be open
 
+  @yourtag
   Scenario: Create new project modal closes
     When the user presses the button "Neues Projekt anlegen"
     Then the modal with empty form should be open

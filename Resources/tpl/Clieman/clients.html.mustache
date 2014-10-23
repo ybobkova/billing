@@ -49,33 +49,58 @@
     <div>
       <h1>Kunden verwalten</h1>
       <form class="navbar-form navbar-left" id="new">
-          <input type="text" class="form-control" name="new_client" data-bind="value: client_name" placeholder="Kundenname">
-          <button data-bind="click: addClient" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Neuen Kunden anlegen</button>
+        <input type="text" class="form-control" name="new_client" data-bind="value: new_name" placeholder="Kundenname">
+        <button data-bind="click: addClient" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Neuen Kunden anlegen</button>
+        <div class="flash-notice">
+          {{ app.session.flashbag.get('notice') }}
+        </div>
       </form>
       <form class="navbar-form navbar-left" id="search">
-        <input type="text" class="form-control" placeholder="Nach Kunde suchen..."> <!-- Filter the table -->
-        <button type="submit" class="btn btn-info" id="search-button"><span class="glyphicon glyphicon-search"></span></button>
+        <input type="text" class="form-control" name="find_clients" data-bind="value: search_name, valueUpdate: 'afterkeydown'" placeholder="Nach Kunde suchen..."> <!-- Filter the table -->
         <br />
-        <small><i>Sie können nach einem Kunden nach Namen oder ID suchen.(?)</i></small>
+        <small><i>Sie können nach Namen suchen.(?)</i></small>
       </form>
       <div class="table">
         <table class="table table-hover table-striped span3" name="clients">
           <thead>
             <tr>
               <th>Name</th>
-              <th>ID</th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
-          <tbody data-bind="foreach: clients">
-            <tr class='clickableRow' href='./projects.html'>
-              <td data-bind="text: name"></td>
-              <td data-bind="text: id"></td>
-              <td><button data-bind="click: $root.removeClient" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i></button></td>
+          <tbody data-bind="foreach: filteredClients">
+            <tr>
+              <td data-bind="text: name, click: $root.openProjects"></td>
+              <td><button data-bind="click: $root.copyValues" data-toggle="modal" data-target="#edit_client" class="btn btn-default" id="edit"><i class="glyphicon glyphicon-cog"></i></button></td>
+              <td><button data-bind="click: $root.removeClient" class="btn btn-default" id="remove"><i class="glyphicon glyphicon-trash"></i></button></td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- Modal : edit client -->
+
+      <div class="modal" id="edit_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-bind:"click:nullValues" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Kundendaten bearbeiten</h4>
+            </div>
+            <form role="form" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:45px">
+              <fieldset>
+                <div class="form-group">
+                  <input data-bind="value:edit_name" type="name" name="name" id="name" class="form-control input-lg" placeholder="Kundenname">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-bind="click:editClient" data-dismiss="modal" class="btn btn-primary">Speichern</button>
+                </div>
+              </fieldset>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     </div> <!-- /container -->
   </body>
 </html>

@@ -2,9 +2,19 @@ home:
     path:      /
     defaults:  { _controller: controller.main:homeAction }
 
+get_projects:
+    path:      /clients/{id}/projects
+    defaults:  { _controller: controller.projects:indexAction }
+
 clients:
     path:      /clients
     defaults:  { _controller: controller.clients:indexAction }
+
+clients_error:
+    path:      /clients/{error}
+    defaults:  { _controller: controller.clients:reloadWithErrorAction }
+    requirements:
+      error: \w+
 
 add_client:
     path:      /api/clients
@@ -15,6 +25,20 @@ get_clients:
     path:      /api/clients
     defaults:  { _controller: controller.clients:getClientsAction }
     methods:  [GET]
+
+edit_client:
+    path:      /api/clients/{id}
+    defaults:  { _controller: controller.clients:editClientAction }
+    methods:  [PUT]
+    requirements:
+      id: \d+
+
+remove_client:
+    path:      /api/clients/{id}
+    defaults:  { _controller: controller.clients:removeClientAction }
+    methods:  [DELETE]
+    requirements:
+      id: \d+
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

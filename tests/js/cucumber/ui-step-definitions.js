@@ -1,4 +1,6 @@
 module.exports = function(expect, commons) {
+  var that = this;
+
   commons.fillIn = function(field, value, callback) {
     var world = this;
     var $field = world.css('input[name="'+ field + '"]').exists().get();
@@ -27,8 +29,49 @@ module.exports = function(expect, commons) {
     callback();
   });
 
-  this.Given(/^"([^"]*)" must be seen in the last row of the "([^"]*)"\-table$/, function(entry, table, callback, withCSS) {
-    this.css('table[name='+table+']').exists().css('tr:last-child td:last-child:contains("'+entry+'")').count(1);
+  this.Given(/^"([^"]*)" must be seen in the "([^"]*)"\-table$/, function(entry, table, callback, withCSS) {
+    this.css('table[name=' + table + '] tr td:first-child:contains("' + entry + '")').count(1);
     callback();
+  });
+
+  this.Then(/^no changes appear in the "([^"]*)"\-table$/, function(table, callback, withCSS) {
+    this.css('table[name=' + table + '] tbody tr').count(5);
+    callback();
+  });
+
+  this.Then(/^only the clients with "([^"]*)" in name should be seen in the "([^"]*)"\-table$/, function(name, table, callback, withCSS) {
+    var lines_num = this.css('table[name=' + table + '] tbody tr').exists().get().length;
+    this.css('table[name=' + table + '] tbody tr td:first-child:contains("' + name + '")').count(lines_num);
+    callback();
+  });
+
+  this.Given(/^the user presses the "([^"]*)"-button in the row "([^"]*)" in the "([^"]*)"\-table$/, function(button_id, row, table, callback, withCSS) {
+    $button = this.css('table[name=' + table + '] tbody tr:has(td:contains("' + row + '")) button[id=' + button_id + ']').exists().get();
+    this.util.pressButton($button, callback);
+  });
+
+  this.Then(/^the row "([^"]*)" should disappear from the "([^"]*)"\-table$/, function(client, table, callback, withCSS) {
+    this.css('table[name=' + table + '] tbody tr:has(td:first-child:contains("' + client + '"))').count(0);
+    callback();
+  });
+
+  this.Then(/^the row "([^"]*)" should appear in the "([^"]*)"\-table$/, function(client, table, callback, withCSS) {
+    this.css('table[name=' + table + '] tbody tr:has(td:first-child:contains("' + client + '"))').count(1);
+    callback();
+  });
+
+  this.Then(/^a modal "([^"]*)" should be opened$/, function(title, callback, withCSS) {
+    this.css('h4:contains("' + title + '")').exists();
+    callback();
+  });
+
+  this.Then(/^a modal "([^"]*)" should be closed$/, function(title, callback, withCSS) {
+    this.css('.modal').is(":not(:visible)");
+    callback();
+  });
+
+  this.Given(/^the user presses the name "([^"]*)" in the "([^"]*)"-table$/, function(name, table, callback, withCSS) {
+    $row = this.css('table[name=' + table + '] tbody tr td:first-child:contains("' + name + '")').exists().get();
+    this.util.clickLink($row, callback);
   });
 };

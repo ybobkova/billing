@@ -8,3 +8,8 @@ services:
     class:     Clieman\Controllers\ClientsController
     calls:
       - [setContainer, ["@service_container"]]
+
+  controller.projects:
+    class:     Clieman\Controllers\ProjectsController
+    calls:
+      - [setContainer, ["@service_container"]]

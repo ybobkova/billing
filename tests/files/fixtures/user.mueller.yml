@@ -1,7 +1,15 @@
 Clieman\Entities\Client:
   threeFatties:
     name: Three Fatties
-    userId: 1
+    projects: [@bigIcecream, @manyBurgers, @pommesKings]
+  bigBrother:
+    name: Big Brother
+  pizzaEsser:
+    name: Pizza Esser
+    projects: [@bpCompetition2]
+  pizzaBacker:
+    name: Pizza Backer
+    projects: [@bpCompetition]
 
 Clieman\Entities\User:
   herrmueller: 
@@ -10,3 +18,15 @@ Clieman\Entities\User:
     plainPassword: secret123
     enabled: true
     roles: ['ROLE_ADMIN']
+
+Clieman\Entities\Project:
+  bigIcecream:
+    name: bigIcecream
+  manyBurgers:
+    name: manyBurgers
+  pommesKings:
+    name: pommesKings
+  bpCompetition:
+    name: biggestPizzaCompetition
+  bpCompetition2:
+    name: biggestPizzaCompetition

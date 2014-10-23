@@ -7,11 +7,15 @@ var require = {
   paths: {
     "bootstrap": "lib/bootstrap.min",
     "KnockoutSync": "lib/KnockoutSync",
-    "Amplify": "lib/amplify.core"
+    "Amplify": "lib/amplify.core",
+    "knockout-projections": "lib/knockout-projections"
   },
   shim: {
     'bootstrap': {
       deps: ['jquery']
+    },
+    'knockout': {
+      deps: ['knockout']
     }
   }
 

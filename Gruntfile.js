@@ -53,18 +53,6 @@ module.exports = function (grunt) {
       },
       "jslibs": {
         files: [
-          {expand: true, cwd: "node_modules/knockout-sync/src/js", src: ['KnockoutSync/**/*'], dest: 'src/js/lib'},
-          {expand: true, cwd: "node_modules/webforge-js-components/src/js/lib", src: ['**/*.js'], dest: 'src/js/lib'},
-          {expand: true, cwd: "src/js/lib", src: ['**/*.js'], dest: 'www/assets/js/lib'}
-        ]
-      },
-      "jsmisc": {
-        files: [
-          {expand: true, src: ['etc/doctrine/model-compiled.json'], dest: 'www/assets/js'},
-        ]
-      },
-      "jslibs": {
-        files: [
           {expand: true, cwd: "src/js/lib", src: ['**/*.js'], dest: 'www/assets/js/lib'}
         ]
       },
